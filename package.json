@@ -1,0 +1,62 @@
+{
+  "name": "codemirror-elements",
+  "version": "0.0.1",
+  "description": "A set of CodeMirror custom HTML elements",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "wireit",
+    "start:demo": "wireit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinfagnani/codemirror-elements.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justinfagnani/codemirror-elements/issues"
+  },
+  "homepage": "https://github.com/justinfagnani/codemirror-elements#readme",
+  "devDependencies": {
+    "@web/dev-server": "^0.1.35",
+    "prettier": "^2.8.3",
+    "typescript": "^5.0.0-beta",
+    "wireit": "^0.9.4"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.4.0",
+    "@codemirror/commands": "^6.2.0",
+    "@codemirror/lang-css": "^6.0.2",
+    "@codemirror/lang-html": "^6.4.2",
+    "@codemirror/lang-javascript": "^6.1.3",
+    "@codemirror/language": "^6.4.0",
+    "@codemirror/lint": "^6.1.0",
+    "@codemirror/search": "^6.2.3",
+    "@codemirror/state": "^6.2.0",
+    "@codemirror/theme-one-dark": "^6.1.0",
+    "@codemirror/view": "^6.7.3",
+    "@lit-labs/context": "^0.2.0",
+    "lit": "^2.6.1"
+  },
+  "wireit": {
+    "build": {
+      "command": "tsc --pretty",
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.json"
+      ],
+      "output": [
+        "index.{js|js.map|d.ts|d.ts.map}"
+      ],
+      "clean": "if-file-deleted"
+    },
+    "start:demo": {
+      "command": "wds --node-resolve",
+      "dependencies": [
+        "build"
+      ]
+    }
+  }
+}
