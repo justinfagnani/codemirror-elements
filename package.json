@@ -55,7 +55,9 @@
         "tsconfig.json"
       ],
       "output": [
-        "index.{js|js.map|d.ts|d.ts.map}"
+        "index.{js|js.map|d.ts|d.ts.map}",
+        "/lib/",
+        ".tsbuildinfo"
       ],
       "clean": "if-file-deleted"
     },
