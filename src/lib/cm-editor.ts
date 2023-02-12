@@ -101,7 +101,7 @@ export class CodeMirrorEditor extends LitElement {
     const effect = this.#addedExtensionCompartment.reconfigure([
       ...this.#addedExtensions,
     ]);
-    this.editorView!.dispatch({effects: [effect]});
+    this.editorView?.dispatch({effects: [effect]});
   }
 
   removeExtensions(extensions: Array<Extension>) {
