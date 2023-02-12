@@ -1,7 +1,7 @@
 import {type PropertyValues} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {javascript} from '@codemirror/lang-javascript';
-import {CodeMirrorExtensionElement} from './cm-extention-element.js';
+import {CodeMirrorExtensionElement} from './cm-extension-element.js';
 
 @customElement('cm-lang-javascript')
 export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {

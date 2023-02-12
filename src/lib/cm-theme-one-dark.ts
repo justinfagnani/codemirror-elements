@@ -1,5 +1,5 @@
 import {customElement} from 'lit/decorators.js';
-import {CodeMirrorExtensionElement} from './cm-extention-element.js';
+import {CodeMirrorExtensionElement} from './cm-extension-element.js';
 import {oneDark} from '@codemirror/theme-one-dark';
 
 @customElement('cm-theme-one-dark')

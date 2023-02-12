@@ -1,6 +1,6 @@
 import {type PropertyValues} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {CodeMirrorExtensionElement} from './cm-extention-element.js';
+import {CodeMirrorExtensionElement} from './cm-extension-element.js';
 import {html, type TagSpec} from '@codemirror/lang-html';
 import type {Parser} from '@lezer/common';
 
