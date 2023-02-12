@@ -1,6 +1,6 @@
 {
   "name": "codemirror-elements",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A set of CodeMirror custom HTML elements",
   "type": "module",
   "main": "index.js",
@@ -19,6 +19,13 @@
     "url": "https://github.com/justinfagnani/codemirror-elements/issues"
   },
   "homepage": "https://github.com/justinfagnani/codemirror-elements#readme",
+  "files": [
+    "index.js",
+    "index.js.map",
+    "index.d.ts",
+    "index.d.ts.map",
+    "/lib/"
+  ],
   "devDependencies": {
     "@web/dev-server": "^0.1.35",
     "prettier": "^2.8.3",
