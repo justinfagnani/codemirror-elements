@@ -29,7 +29,7 @@
   "devDependencies": {
     "@web/dev-server": "^0.1.35",
     "prettier": "^2.8.3",
-    "typescript": "^5.0.0-beta",
+    "typescript": "~5.0.0",
     "wireit": "^0.9.4"
   },
   "dependencies": {
@@ -44,7 +44,7 @@
     "@codemirror/state": "^6.2.0",
     "@codemirror/theme-one-dark": "^6.1.0",
     "@codemirror/view": "^6.7.3",
-    "@lit-labs/context": "^0.2.0",
+    "@lit-labs/context": "^0.3.0",
     "lit": "^2.6.1"
   },
   "wireit": {
