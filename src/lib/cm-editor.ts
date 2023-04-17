@@ -21,6 +21,7 @@ import {
   Transaction,
   type Extension,
   type Text,
+  type ChangeSpec,
 } from '@codemirror/state';
 import {
   defaultHighlightStyle,
@@ -86,7 +87,10 @@ export class CodeMirrorEditor extends LitElement {
     return this.editorView.dom;
   }
 
-    return html`<div id="wrapper"></div>`;
+  changeDocument(change: ChangeSpec): void {
+    this.editorView.dispatch({
+      changes: [change],
+    });
   }
 
   addExtensions(extensions: Array<Extension>) {
