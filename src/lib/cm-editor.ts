@@ -1,4 +1,4 @@
-import {css, html, LitElement} from 'lit';
+import {css, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {ContextProvider} from '@lit-labs/context';
 
@@ -54,48 +54,38 @@ export class CodeMirrorEditor extends LitElement {
       display: block;
     }
     #wrapper {
-      /* TODO: grad from theme */
+      /* TODO: grab from theme */
       border: solid 1px rgb(221, 221, 221);
     }
   `;
 
   @property({attribute: false})
-  editorView?: EditorView;
-
-  /**
-   * If we don't have an editor view yet, this will be the value set from the
-   * outside.
-   */
-  #setValue?: string;
+  editorView!: EditorView;
 
   @property()
   get value(): string | undefined {
-    if (this.editorView === undefined) {
-      return this.#setValue;
-    } else {
-      return this.editorView.state.doc.toString();
-    }
+    return this.editorView.state.doc.toString();
   }
 
   set value(v: string | undefined) {
-    if (this.editorView === undefined) {
-      this.#setValue = v;
-    } else {
-      this.editorView.dispatch({
-        changes: [{from: 0, to: this.editorView.state.doc.length, insert: v}],
-      });
-    }
+    this.editorView.dispatch({
+      changes: [{from: 0, to: this.editorView.state.doc.length, insert: v}],
+    });
   }
 
   constructor() {
     super();
-    new ContextProvider(this, extensionsContext, this);
+    this._createEditorView();
+    new ContextProvider(this, {context: extensionsContext, initialValue: this});
   }
 
   #addedExtensions = new Set<Extension>();
   #addedExtensionCompartment = new Compartment();
 
   override render() {
+    return this.editorView.dom;
+  }
+
     return html`<div id="wrapper"></div>`;
   }
 
@@ -133,10 +123,8 @@ export class CodeMirrorEditor extends LitElement {
   //   }
   // }
 
-  protected override async firstUpdated() {
-    const wrapper = this.shadowRoot!.querySelector('#wrapper');
+  private _createEditorView() {
     const view = (this.editorView = new EditorView({
-      doc: this.#setValue,
       dispatch: (t: Transaction) => {
         let notPrevented = this.dispatchEvent(new TransactionEvent(t));
 
@@ -190,9 +178,7 @@ export class CodeMirrorEditor extends LitElement {
         ]),
         this.#addedExtensionCompartment.of([]),
       ],
-      parent: wrapper!,
     }));
-    this.#setValue = undefined;
   }
 }
 
