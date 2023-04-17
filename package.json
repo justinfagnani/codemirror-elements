@@ -1,6 +1,6 @@
 {
   "name": "codemirror-elements",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A set of CodeMirror custom HTML elements",
   "type": "module",
   "main": "index.js",
@@ -70,10 +70,13 @@
       "command": "wtr",
       "dependencies": [
         "build"
-      ]
+      ],
+      "files": [],
+      "output": []
     },
     "start:demo": {
       "command": "wds --node-resolve",
+      "service": true,
       "dependencies": [
         "build"
       ]
