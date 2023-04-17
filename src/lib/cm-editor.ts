@@ -1,4 +1,4 @@
-import {css, LitElement} from 'lit';
+import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {ContextProvider} from '@lit-labs/context';
 
@@ -42,6 +42,78 @@ import {
 import {lintKeymap} from '@codemirror/lint';
 import {extensionsContext} from './extension-host-context.js';
 
+
+/**
+ * An event emmitted for all CodeMirror transactions.
+ *
+ * Calling `preventDefault()` on this event will prevent the transaction from
+ * being applied to the editor.
+ */
+export class TransactionEvent extends Event {
+  static readonly eventName = 'codemirror-transaction';
+
+  public readonly transaction: Transaction;
+
+  declare target: CodeMirrorEditor;
+
+  constructor(transaction: Transaction) {
+    super(TransactionEvent.eventName, {bubbles: true});
+    this.transaction = transaction;
+  }
+}
+
+/**
+ * An event emmitted for all CodeMirror document changes. This event is emitted
+ * after the transaction event.
+ *
+ * Calling `preventDefault()` on this event will prevent the transaction from
+ * being applied to the editor.
+ */
+export class DocumentChangeEvent extends Event {
+  static readonly eventName = 'codemirror-document-change';
+
+  public readonly transaction: Transaction;
+  public changes: Array<Change>;
+
+  declare target: CodeMirrorEditor;
+
+  constructor(transaction: Transaction, changes: Array<Change>) {
+    super(DocumentChangeEvent.eventName, {bubbles: true});
+    this.transaction = transaction;
+    this.changes = changes;
+  }
+}
+
+export type Change = {
+  fromA: number;
+  toA: number;
+  fromB: number;
+  toB: number;
+  inserted: Text;
+};
+
+/**
+ * An event emmitted for all CodeMirror selection changes. This event is emitted
+ * after the transaction event.
+ *
+ * Calling `preventDefault()` on this event will prevent the transaction from
+ * being applied to the editor.
+ */
+export class SelectionChangeEvent extends Event {
+  static readonly eventName = 'codemirror-selection-change';
+
+  public readonly transaction: Transaction;
+  public readonly selection: EditorSelection;
+
+  declare target: CodeMirrorEditor;
+
+  constructor(transaction: Transaction, selection: EditorSelection) {
+    super(SelectionChangeEvent.eventName, {bubbles: true});
+    this.transaction = transaction;
+    this.selection = selection;
+  }
+}
+
 declare global {
   interface HTMLElementTagNameMap {
     'cm-editor': CodeMirrorEditor;
@@ -84,7 +156,13 @@ export class CodeMirrorEditor extends LitElement {
   #addedExtensionCompartment = new Compartment();
 
   override render() {
-    return this.editorView.dom;
+    return html`<div id="wrapper">${this.editorView.dom}</div>`;
+  }
+
+  override createRenderRoot() {
+    const root = super.createRenderRoot();
+    this.editorView.setRoot(root as ShadowRoot);
+    return root;
   }
 
   changeDocument(change: ChangeSpec): void {
@@ -183,76 +261,5 @@ export class CodeMirrorEditor extends LitElement {
         this.#addedExtensionCompartment.of([]),
       ],
     }));
-  }
-}
-
-/**
- * An event emmitted for all CodeMirror transactions.
- *
- * Calling `preventDefault()` on this event will prevent the transaction from
- * being applied to the editor.
- */
-export class TransactionEvent extends Event {
-  static readonly eventName = 'codemirror-transaction';
-
-  public readonly transaction: Transaction;
-
-  declare target: CodeMirrorEditor;
-
-  constructor(transaction: Transaction) {
-    super(TransactionEvent.eventName, {bubbles: true});
-    this.transaction = transaction;
-  }
-}
-
-/**
- * An event emmitted for all CodeMirror document changes. This event is emitted
- * after the transaction event.
- *
- * Calling `preventDefault()` on this event will prevent the transaction from
- * being applied to the editor.
- */
-export class DocumentChangeEvent extends Event {
-  static readonly eventName = 'codemirror-document-change';
-
-  public readonly transaction: Transaction;
-  public changes: Array<Change>;
-
-  declare target: CodeMirrorEditor;
-
-  constructor(transaction: Transaction, changes: Array<Change>) {
-    super(DocumentChangeEvent.eventName, {bubbles: true});
-    this.transaction = transaction;
-    this.changes = changes;
-  }
-}
-
-export type Change = {
-  fromA: number;
-  toA: number;
-  fromB: number;
-  toB: number;
-  inserted: Text;
-};
-
-/**
- * An event emmitted for all CodeMirror selection changes. This event is emitted
- * after the transaction event.
- *
- * Calling `preventDefault()` on this event will prevent the transaction from
- * being applied to the editor.
- */
-export class SelectionChangeEvent extends Event {
-  static readonly eventName = 'codemirror-selection-change';
-
-  public readonly transaction: Transaction;
-  public readonly selection: EditorSelection;
-
-  declare target: CodeMirrorEditor;
-
-  constructor(transaction: Transaction, selection: EditorSelection) {
-    super(SelectionChangeEvent.eventName, {bubbles: true});
-    this.transaction = transaction;
-    this.selection = selection;
   }
 }
