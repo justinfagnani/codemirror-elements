@@ -2,4 +2,4 @@
 /lib/
 .wireit/
 .tsbuildinfo
-index.*
+/index.*

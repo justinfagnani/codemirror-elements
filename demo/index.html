@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module" src="../index.js"></script>
+    <script type="module" src="../lib/cm-lang-javascript.js"></script>
+    <script type="module" src="../lib/cm-lang-html.js"></script>
+    <script type="module" src="../lib/cm-lang-css.js"></script>
+    <script type="module" src="../lib/cm-theme-one-dark.js"></script>
+  </head>
+  <body>
+    <h1>&lt;cm-editor&gt;</h1>
+
+    <h3>JavaScript</h3>
+    <cm-editor value="console.log('Hello');">
+      <cm-lang-javascript jsx typescript></cm-lang-javascript>
+      <cm-theme-one-dark></cm-theme-one-dark>
+    </cm-editor>
+
+    <h3>HTML</h3>
+    <cm-editor value="<h1>Hello</h1>">
+      <cm-lang-html></cm-lang-html>
+    </cm-editor>
+
+    <h3>CSS</h3>
+    <cm-editor value=".hello { color: red; }">
+      <cm-lang-css></cm-lang-css>
+    </cm-editor>
+
+  </body>
+</html>
