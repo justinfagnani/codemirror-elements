@@ -1,11 +1,12 @@
 {
   "name": "codemirror-elements",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A set of CodeMirror custom HTML elements",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "build": "wireit",
+    "test": "wireit",
     "start:demo": "wireit"
   },
   "repository": {
@@ -27,7 +28,11 @@
     "/lib/"
   ],
   "devDependencies": {
+    "@types/chai": "^4.3.4",
     "@web/dev-server": "^0.1.35",
+    "@web/test-runner": "^0.15.3",
+    "@web/test-runner-playwright": "^0.9.0",
+    "chai": "^5.0.0-alpha.0",
     "prettier": "^2.8.3",
     "typescript": "~5.0.0",
     "wireit": "^0.9.4"
@@ -60,6 +65,12 @@
         ".tsbuildinfo"
       ],
       "clean": "if-file-deleted"
+    },
+    "test": {
+      "command": "wtr",
+      "dependencies": [
+        "build"
+      ]
     },
     "start:demo": {
       "command": "wds --node-resolve",
