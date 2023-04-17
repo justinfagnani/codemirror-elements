@@ -41,6 +41,12 @@ import {
 import {lintKeymap} from '@codemirror/lint';
 import {extensionsContext} from './extension-host-context.js';
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'cm-editor': CodeMirrorEditor;
+  }
+}
+
 @customElement('cm-editor')
 export class CodeMirrorEditor extends LitElement {
   static override styles = css`

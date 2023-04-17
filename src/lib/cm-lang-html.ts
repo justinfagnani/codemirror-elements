@@ -4,8 +4,14 @@ import {CodeMirrorExtensionElement} from './cm-extension-element.js';
 import {html, type TagSpec} from '@codemirror/lang-html';
 import type {Parser} from '@lezer/common';
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'cm-lang-html': CodeMirrorLangHTML;
+  }
+}
+
 @customElement('cm-lang-html')
-export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {
+export class CodeMirrorLangHTML extends CodeMirrorExtensionElement {
   /**
    * By default, the syntax tree will highlight mismatched closing
    * tags. Set this to `true` to turn that off (for example when you

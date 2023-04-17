@@ -3,6 +3,12 @@ import {customElement, property} from 'lit/decorators.js';
 import {javascript} from '@codemirror/lang-javascript';
 import {CodeMirrorExtensionElement} from './cm-extension-element.js';
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'cm-lang-javascript': CodeMirrorLangJavascript;
+  }
+}
+
 @customElement('cm-lang-javascript')
 export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {
 
