@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>CodeMirror Elements Demo</title>
     <script type="module" src="../index.js"></script>
     <script type="module" src="../lib/cm-lang-javascript.js"></script>
     <script type="module" src="../lib/cm-lang-html.js"></script>
@@ -25,6 +26,12 @@
     <cm-editor value=".hello { color: red; }">
       <cm-lang-css></cm-lang-css>
     </cm-editor>
+
+    <h3>Plain</h3>
+    <div id="plain" style="height: 400px; border: solid 1px blue;">
+      <cm-editor value="Hello World" style="height: 100%">
+      </cm-editor>
+    </div>
 
   </body>
 </html>
