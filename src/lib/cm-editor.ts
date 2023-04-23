@@ -1,4 +1,4 @@
-import {css, html, LitElement} from 'lit';
+import {css, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {ContextProvider} from '@lit-labs/context';
 
@@ -41,7 +41,6 @@ import {
 } from '@codemirror/autocomplete';
 import {lintKeymap} from '@codemirror/lint';
 import {extensionsContext} from './extension-host-context.js';
-
 
 /**
  * An event emmitted for all CodeMirror transactions.
@@ -125,8 +124,6 @@ export class CodeMirrorEditor extends LitElement {
   static override styles = css`
     :host {
       display: block;
-    }
-    #wrapper {
       /* TODO: grab from theme */
       border: solid 1px rgb(221, 221, 221);
     }
@@ -156,7 +153,7 @@ export class CodeMirrorEditor extends LitElement {
   #addedExtensionCompartment = new Compartment();
 
   override render() {
-    return html`<div id="wrapper">${this.editorView.dom}</div>`;
+    return this.editorView.dom;
   }
 
   override createRenderRoot() {
@@ -191,19 +188,6 @@ export class CodeMirrorEditor extends LitElement {
     ]);
     this.editorView?.dispatch({effects: [effect]});
   }
-
-  // protected override updated(
-  //   changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-  // ): void {
-  //   // console.log('updated');
-  //   if (changedProperties.has('value')) {
-  //     const editor = this.editorView!;
-  //     const length = editor.state.doc.length;
-  //     editor.dispatch({
-  //       changes: [{from: 0, to: length, insert: this.value}],
-  //     });
-  //   }
-  // }
 
   private _createEditorView() {
     const view = (this.editorView = new EditorView({
