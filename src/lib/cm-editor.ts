@@ -127,6 +127,13 @@ export class CodeMirrorEditor extends LitElement {
       /* TODO: grab from theme */
       border: solid 1px rgb(221, 221, 221);
     }
+    .cm-editor {
+      height: 100%;
+      max-height 100%;
+    }
+    .cm-scroller {
+      overflow: auto;
+    }
   `;
 
   @property({attribute: false})
