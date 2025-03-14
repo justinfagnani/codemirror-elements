@@ -2,7 +2,12 @@
 
 A set of HTML custom elements for editing source code with CodeMirror.
 
-codemirror-elements can be used anywhere HTML can:
+Adding a code editor to you page can be as simple as:
+```html
+<cm-editor></cm-editor>
+```
+
+`codemirror-elements` can be used anywhere HTML can:
 
 - Plain HTML
 - Markdown
@@ -66,7 +71,16 @@ editor.value = "console.log('Hello');";
 
 ### Listen for changes
 
-JavaScript:
+`<cm-editor>` fires a DOM events for CodeMirror callbacks:
+
+- `codemirror-transaction`: a TransactionEvent fired on all CodeMirror
+  transactions.
+- `codemirror-document-change`: a DocumentChangeEvent fired on CodeMirror
+  transactions that include document changes.
+- `codemirror-selection-change`: a SelectionChangeEvent fired on  CodeMirror
+  transactions that include selection changes.
+
+Example:
 
 ```js
 const editor = document.querySelector('cm-editor');
@@ -97,7 +111,7 @@ HTML:
 </cm-editor>
 ```
 
-This package implements a few CodeMirror extsions as elements:
+This package implements a few CodeMirror extensions as elements:
 
 - `<cm-lang-javascript>`
 - `<cm-lang-html>`
@@ -105,13 +119,14 @@ This package implements a few CodeMirror extsions as elements:
 - `<cm-lang-lit>`
 - `<cm-theme-one-dark>`
 
-The intention is to add more, either in this package, or as independently installable packages.
+The intention is to add more, either in this package, or as independently
+installable packages.
 
 ### Write an extension element
 
 ```ts
 import {customElement} from 'lit/decorators.js';
-import {CodeMirrorExtensionElement} from 'codemirror-elements/lib/cm-extention-element.js';
+import {CodeMirrorExtensionElement} from 'codemirror-elements/lib/cm-extension-element.js';
 import {someExtension} from 'some-codemirror-extension';
 
 @customElement('cm-lang-css')
@@ -123,7 +138,10 @@ export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {
 }
 ```
 
-Extensions can also by dynamically update with `CodeMirrorExtensionElement.addExtensions()` and `CodeMirrorExtensionElement.removeExtensions()`. This can be used to reconfigure extensions based on element properties.
+Extensions can also by dynamically updated with
+`CodeMirrorExtensionElement.addExtensions()` and
+`CodeMirrorExtensionElement.removeExtensions()`. This can be used to reconfigure
+extensions based on element properties.
 
 See the `<cm-lang-javascript>` element for an example:
 
@@ -131,7 +149,7 @@ See the `<cm-lang-javascript>` element for an example:
 import {type PropertyValues} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {javascript} from '@codemirror/lang-javascript';
-import {CodeMirrorExtensionElement} from './cm-extention-element.js';
+import {CodeMirrorExtensionElement} from './cm-extension-element.js';
 
 @customElement('cm-lang-javascript')
 export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {
@@ -154,4 +172,6 @@ export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {
 
 ## Contributing
 
-This is a small side-project of mine. If you can make use of these elements and need some features or bug fixes, please reach out and hopefully we can collaborate!
+This is a small side-project of mine. If you can make use of these elements and
+need some features or bug fixes, please reach out and hopefully we can
+collaborate!
