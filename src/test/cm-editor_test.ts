@@ -1,11 +1,11 @@
+import {EditorSelection} from '@codemirror/state';
+import {assert} from 'chai';
+import type {CodeMirrorEditor} from '../lib/cm-editor.js';
 import {
   DocumentChangeEvent,
   SelectionChangeEvent,
   TransactionEvent,
 } from '../lib/cm-editor.js';
-import type {CodeMirrorEditor} from '../lib/cm-editor.js';
-import {assert} from 'chai';
-import {EditorSelection} from '@codemirror/state';
 
 suite('cm-editor', () => {
   let el: CodeMirrorEditor;

@@ -1,5 +1,5 @@
-import {createContext} from '@lit/context';
 import type {Extension} from '@codemirror/state';
+import {createContext} from '@lit/context';
 
 export const extensionsContext = createContext<CodeMirrorExtensionHost>(
   Symbol('CodeMirrorExtensionHost'),

@@ -1,6 +1,6 @@
+import {oneDark} from '@codemirror/theme-one-dark';
 import {customElement} from 'lit/decorators.js';
 import {CodeMirrorExtensionElement} from './cm-extension-element.js';
-import {oneDark} from '@codemirror/theme-one-dark';
 
 declare global {
   interface HTMLElementTagNameMap {

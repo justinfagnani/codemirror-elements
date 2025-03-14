@@ -1,10 +1,10 @@
-import {css, ReactiveElement} from 'lit';
+import {type Extension} from '@codemirror/state';
 import {ContextConsumer} from '@lit/context';
+import {css, ReactiveElement} from 'lit';
 import {
   type CodeMirrorExtensionHost,
   extensionsContext,
 } from './extension-host-context.js';
-import {type Extension} from '@codemirror/state';
 
 export abstract class CodeMirrorExtensionElement extends ReactiveElement {
   static override styles = css`

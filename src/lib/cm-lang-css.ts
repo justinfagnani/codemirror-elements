@@ -1,6 +1,6 @@
+import {css} from '@codemirror/lang-css';
 import {customElement} from 'lit/decorators.js';
 import {CodeMirrorExtensionElement} from './cm-extension-element.js';
-import {css} from '@codemirror/lang-css';
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,45 +1,44 @@
-import {css, LitElement} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
-import {ContextProvider} from '@lit/context';
-
-import {
-  EditorView,
-  keymap,
-  highlightSpecialChars,
-  drawSelection,
-  highlightActiveLine,
-  dropCursor,
-  rectangularSelection,
-  crosshairCursor,
-  lineNumbers,
-  highlightActiveLineGutter,
-} from '@codemirror/view';
-import {
-  Compartment,
-  type EditorSelection,
-  EditorState,
-  Transaction,
-  type Extension,
-  type Text,
-  type ChangeSpec,
-} from '@codemirror/state';
-import {
-  defaultHighlightStyle,
-  syntaxHighlighting,
-  indentOnInput,
-  bracketMatching,
-  foldGutter,
-  foldKeymap,
-} from '@codemirror/language';
-import {defaultKeymap, history, historyKeymap} from '@codemirror/commands';
-import {searchKeymap, highlightSelectionMatches} from '@codemirror/search';
 import {
   autocompletion,
-  completionKeymap,
   closeBrackets,
   closeBracketsKeymap,
+  completionKeymap,
 } from '@codemirror/autocomplete';
+import {defaultKeymap, history, historyKeymap} from '@codemirror/commands';
+import {
+  bracketMatching,
+  defaultHighlightStyle,
+  foldGutter,
+  foldKeymap,
+  indentOnInput,
+  syntaxHighlighting,
+} from '@codemirror/language';
 import {lintKeymap} from '@codemirror/lint';
+import {highlightSelectionMatches, searchKeymap} from '@codemirror/search';
+import {
+  Compartment,
+  EditorState,
+  Transaction,
+  type ChangeSpec,
+  type EditorSelection,
+  type Extension,
+  type Text,
+} from '@codemirror/state';
+import {
+  crosshairCursor,
+  drawSelection,
+  dropCursor,
+  EditorView,
+  highlightActiveLine,
+  highlightActiveLineGutter,
+  highlightSpecialChars,
+  keymap,
+  lineNumbers,
+  rectangularSelection,
+} from '@codemirror/view';
+import {ContextProvider} from '@lit/context';
+import {css, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 import {extensionsContext} from './extension-host-context.js';
 
 /**
