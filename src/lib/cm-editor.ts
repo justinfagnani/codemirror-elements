@@ -151,7 +151,7 @@ export class CodeMirrorEditor extends LitElement {
 
   constructor() {
     super();
-    this._createEditorView();
+    this.#createEditorView();
     new ContextProvider(this, {context: extensionsContext, initialValue: this});
   }
 
@@ -195,7 +195,7 @@ export class CodeMirrorEditor extends LitElement {
     this.editorView?.dispatch({effects: [effect]});
   }
 
-  private _createEditorView() {
+  #createEditorView() {
     const view = (this.editorView = new EditorView({
       dispatch: (t: Transaction) => {
         let notPrevented = this.dispatchEvent(new TransactionEvent(t));
