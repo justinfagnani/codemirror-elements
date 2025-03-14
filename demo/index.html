@@ -6,6 +6,7 @@
     <script type="module" src="../lib/cm-lang-javascript.js"></script>
     <script type="module" src="../lib/cm-lang-html.js"></script>
     <script type="module" src="../lib/cm-lang-css.js"></script>
+    <script type="module" src="../lib/cm-lang-lit.js"></script>
     <script type="module" src="../lib/cm-theme-one-dark.js"></script>
   </head>
   <body>
@@ -31,5 +32,57 @@
     <div id="plain" style="height: 400px; border: solid 1px blue">
       <cm-editor value="Hello World" style="height: 100%"> </cm-editor>
     </div>
+
+    <h3>Lit</h3>
+    <cm-editor id="lit">
+      <cm-theme-one-dark></cm-theme-one-dark>
+      <cm-lang-lit></cm-lang-lit>
+    </cm-editor>
+
+    <script>
+      const lit = document.getElementById("lit");
+      lit.value = `
+  import {LitElement, html, css} from 'lit';
+  import {customElement, property} from 'lit/decorators.js';
+  import {repeat} from 'lit/directives/repeat.js';
+
+  @customElement('my-element')
+  export class MyElement extends LitElement {
+
+    static styles = css\`
+      :host {
+        display: block;
+      }
+    \`;
+
+    @property()
+    items = [1, 2, 3];
+
+    render() {
+      return html\`
+        <h1>Lit Language Demo</h1>
+        <button @click=\${this.#addItem}>Add Item</button>
+        <ul>\${
+          repeat(this.items, (i) => html\`<li>\${i} <span>Delete Me</span></li>\`)}
+        </ul>
+        <svg>
+          \${svg\`<circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />\`}
+        </svg>
+        <mathml>
+          <msup>
+            \${mathml\`<mi>x</mi>\`}
+            <mn>2</mn>
+          </msup>
+        </mathml>
+      \`;
+    }
+    
+    #addItem() {
+      this.items.push(this.items.length + 1);
+      this.requestUpdate();
+    }
+  }
+`;
+    </script>
   </body>
 </html>

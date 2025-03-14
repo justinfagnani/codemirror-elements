@@ -102,6 +102,7 @@ This package implements a few CodeMirror extsions as elements:
 - `<cm-lang-javascript>`
 - `<cm-lang-html>`
 - `<cm-lang-css>`
+- `<cm-lang-lit>`
 - `<cm-theme-one-dark>`
 
 The intention is to add more, either in this package, or as independently installable packages.
