@@ -37,7 +37,7 @@ export abstract class CodeMirrorExtensionElement extends ReactiveElement {
         }
         this.extensionHost = extensionHost;
       },
-      true
+      true,
     );
   }
 

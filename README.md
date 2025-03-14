@@ -3,11 +3,12 @@
 A set of HTML custom elements for editing source code with CodeMirror.
 
 codemirror-elements can be used anywhere HTML can:
-  - Plain HTML
-  - Markdown
-  - Frameworks like React or Angular
-  - Web component libraries like Lit or Stencil
-  - Vanilla JavaScript
+
+- Plain HTML
+- Markdown
+- Frameworks like React or Angular
+- Web component libraries like Lit or Stencil
+- Vanilla JavaScript
 
 ## Install
 
@@ -20,11 +21,16 @@ npm i codemirror-elements
 ### Import the element
 
 HTML:
+
 ```html
-<script type="module" src="./node_modules/codemirror-elements/index.js"></script>
+<script
+  type="module"
+  src="./node_modules/codemirror-elements/index.js"
+></script>
 ```
 
 JavaScript:
+
 ```js
 import 'codemirror-elements';
 ```
@@ -32,18 +38,21 @@ import 'codemirror-elements';
 ### Create a `<cm-editor>` element
 
 HTML:
+
 ```html
 <cm-editor></cm-editor>
 ```
 
 Lit:
+
 ```js
-html`<cm-editor></cm-editor>`
+html`<cm-editor></cm-editor>`;
 ```
 
 ### Set an initial value
 
 HTML:
+
 ```html
 <cm-editor value="console.log('Hello');"></cm-editor>
 ```
@@ -63,7 +72,7 @@ JavaScript:
 const editor = document.querySelector('cm-editor');
 editor.addEventListener('codemirror-document-change', (e) => {
   const newValue = e.target.value;
-})
+});
 ```
 
 ### Add extensions
@@ -71,9 +80,16 @@ editor.addEventListener('codemirror-document-change', (e) => {
 Extensions are also HTML elements that you add as children of `<cm-editor>`:
 
 HTML:
+
 ```html
-<script type="module" src="./node_modules/codemirror-elements/lib/cm-lang-javascript.js"></script>
-<script type="module" src="./node_modules/codemirror-elements/lib/cm-theme-one-dark.js"></script>
+<script
+  type="module"
+  src="./node_modules/codemirror-elements/lib/cm-lang-javascript.js"
+></script>
+<script
+  type="module"
+  src="./node_modules/codemirror-elements/lib/cm-theme-one-dark.js"
+></script>
 
 <cm-editor>
   <cm-lang-javascript typescript></cm-lang-javascript>
@@ -82,6 +98,7 @@ HTML:
 ```
 
 This package implements a few CodeMirror extsions as elements:
+
 - `<cm-lang-javascript>`
 - `<cm-lang-html>`
 - `<cm-lang-css>`
@@ -117,7 +134,6 @@ import {CodeMirrorExtensionElement} from './cm-extention-element.js';
 
 @customElement('cm-lang-javascript')
 export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {
-
   @property({type: Boolean})
   jsx = false;
 

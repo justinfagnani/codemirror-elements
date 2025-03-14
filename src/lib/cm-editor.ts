@@ -208,13 +208,13 @@ export class CodeMirrorEditor extends LitElement {
           });
 
           notPrevented &&= this.dispatchEvent(
-            new DocumentChangeEvent(t, changes)
+            new DocumentChangeEvent(t, changes),
           );
         }
 
         if (t.selection) {
           notPrevented &&= this.dispatchEvent(
-            new SelectionChangeEvent(t, t.selection)
+            new SelectionChangeEvent(t, t.selection),
           );
         }
 

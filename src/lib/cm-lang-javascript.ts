@@ -11,7 +11,6 @@ declare global {
 
 @customElement('cm-lang-javascript')
 export class CodeMirrorLangJavascript extends CodeMirrorExtensionElement {
-
   @property({type: Boolean})
   jsx = false;
 
