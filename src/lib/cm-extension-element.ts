@@ -1,5 +1,5 @@
 import {css, ReactiveElement} from 'lit';
-import {ContextConsumer} from '@lit-labs/context';
+import {ContextConsumer} from '@lit/context';
 import {
   type CodeMirrorExtensionHost,
   extensionsContext,

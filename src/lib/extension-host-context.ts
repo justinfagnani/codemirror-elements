@@ -1,4 +1,4 @@
-import {createContext} from '@lit-labs/context';
+import {createContext} from '@lit/context';
 import type {Extension} from '@codemirror/state';
 
 export const extensionsContext = createContext<CodeMirrorExtensionHost>(

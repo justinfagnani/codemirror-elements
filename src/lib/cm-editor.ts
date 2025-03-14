@@ -1,6 +1,6 @@
 import {css, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {ContextProvider} from '@lit-labs/context';
+import {ContextProvider} from '@lit/context';
 
 import {
   EditorView,
