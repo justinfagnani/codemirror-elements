@@ -42,7 +42,7 @@ import {customElement, property} from 'lit/decorators.js';
 import {extensionsContext} from './extension-host-context.js';
 
 /**
- * An event emmitted for all CodeMirror transactions.
+ * An event emitted for all CodeMirror transactions.
  *
  * Calling `preventDefault()` on this event will prevent the transaction from
  * being applied to the editor.
@@ -61,7 +61,7 @@ export class TransactionEvent extends Event {
 }
 
 /**
- * An event emmitted for all CodeMirror document changes. This event is emitted
+ * An event emitted for all CodeMirror document changes. This event is emitted
  * after the transaction event.
  *
  * Calling `preventDefault()` on this event will prevent the transaction from
@@ -91,7 +91,7 @@ export type Change = {
 };
 
 /**
- * An event emmitted for all CodeMirror selection changes. This event is emitted
+ * An event emitted for all CodeMirror selection changes. This event is emitted
  * after the transaction event.
  *
  * Calling `preventDefault()` on this event will prevent the transaction from
