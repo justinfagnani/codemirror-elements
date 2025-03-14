@@ -7,7 +7,10 @@
   "scripts": {
     "build": "wireit",
     "test": "wireit",
-    "start:demo": "wireit"
+    "start:demo": "wireit",
+    "format": "npm run format:fix",
+    "format:check": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --check",
+    "format:fix": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --write"
   },
   "repository": {
     "type": "git",
