@@ -40,48 +40,47 @@
     </cm-editor>
 
     <script>
-      const lit = document.getElementById("lit");
-      lit.value = `
-  import {LitElement, html, css} from 'lit';
-  import {customElement, property} from 'lit/decorators.js';
-  import {repeat} from 'lit/directives/repeat.js';
+      const lit = document.getElementById('lit');
+      lit.value = `import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
 
-  @customElement('my-element')
-  export class MyElement extends LitElement {
+@customElement('my-element')
+export class MyElement extends LitElement {
 
-    static styles = css\`
-      :host {
-        display: block;
-      }
+  static styles = css\`
+    :host {
+      display: block;
+    }
+  \`;
+
+  @property()
+  items = [1, 2, 3];
+
+  render() {
+    return lit.html\`
+      <h1>Lit Language Demo</h1>
+      <button @click=\${this.#addItem}>Add Item</button>
+      <ul>\${
+        repeat(this.items, (i) => html\`<li>\${i} <span>Delete Me</span></li>\`)}
+      </ul>
+      <svg>
+        \${svg\`<circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />\`}
+      </svg>
+      <mathml>
+        <msup>
+          \${mathml\`<mi>x</mi>\`}
+          <mn>2</mn>
+        </msup>
+      </mathml>
     \`;
-
-    @property()
-    items = [1, 2, 3];
-
-    render() {
-      return html\`
-        <h1>Lit Language Demo</h1>
-        <button @click=\${this.#addItem}>Add Item</button>
-        <ul>\${
-          repeat(this.items, (i) => html\`<li>\${i} <span>Delete Me</span></li>\`)}
-        </ul>
-        <svg>
-          \${svg\`<circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />\`}
-        </svg>
-        <mathml>
-          <msup>
-            \${mathml\`<mi>x</mi>\`}
-            <mn>2</mn>
-          </msup>
-        </mathml>
-      \`;
-    }
-    
-    #addItem() {
-      this.items.push(this.items.length + 1);
-      this.requestUpdate();
-    }
   }
+  
+  #addItem() {
+    this.items.push(this.items.length + 1);
+    this.requestUpdate();
+  }
+}
 `;
     </script>
   </body>

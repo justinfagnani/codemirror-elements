@@ -3,6 +3,7 @@
 A set of HTML custom elements for editing source code with CodeMirror.
 
 Adding a code editor to you page can be as simple as:
+
 ```html
 <cm-editor></cm-editor>
 ```
@@ -77,7 +78,7 @@ editor.value = "console.log('Hello');";
   transactions.
 - `codemirror-document-change`: a DocumentChangeEvent fired on CodeMirror
   transactions that include document changes.
-- `codemirror-selection-change`: a SelectionChangeEvent fired on  CodeMirror
+- `codemirror-selection-change`: a SelectionChangeEvent fired on CodeMirror
   transactions that include selection changes.
 
 Example:
