@@ -3,7 +3,13 @@ import {htmlLanguage} from '@codemirror/lang-html';
 import {javascriptLanguage, jsxLanguage} from '@codemirror/lang-javascript';
 import {xmlLanguage} from '@codemirror/lang-xml';
 import {LanguageSupport, LRLanguage} from '@codemirror/language';
-import {type Input, parseMixed, type SyntaxNodeRef} from '@lezer/common';
+import {
+  type Input,
+  type NestedParse,
+  parseMixed,
+  type SyntaxNode,
+  type SyntaxNodeRef,
+} from '@lezer/common';
 import type {LRParser} from '@lezer/lr';
 
 const parsers: Record<string, LRParser> = {
@@ -13,34 +19,53 @@ const parsers: Record<string, LRParser> = {
   mathml: xmlLanguage.parser,
 };
 
-const litParseWrapper = parseMixed((node: SyntaxNodeRef, input: Input) => {
-  const isTaggedTemplate = node.type.name === 'TaggedTemplateExpression';
-  if (isTaggedTemplate === false) {
+const litParseWrapper = parseMixed((ref: SyntaxNodeRef, input: Input) => {
+  if (ref.name !== 'TemplateString') {
     return null;
   }
 
-  const tag = node.node.getChild('VariableName');
+  // Get the tag name and find the parser for it.
+  const tag = ref.node.prevSibling;
   if (tag === null) {
     return null;
   }
-
-  const tagName = input.read(tag.from, tag.to);
+  let tagName: string;
+  if (tag.name === 'MemberExpression') {
+    const prop = tag.lastChild;
+    if (prop?.name !== 'PropertyName') {
+      return null;
+    }
+    tagName = input.read(prop.from, prop.to);
+  } else if (tag.name === 'VariableName') {
+    tagName = input.read(tag.from, tag.to);
+  } else {
+    return null;
+  }
   const parser = parsers[tagName];
-  console.log('tagName', tagName, parser);
   if (parser === undefined) {
     return null;
   }
 
-  const content = node.node.getChild('TemplateString');
-  if (content !== null) {
-    return {
-      from: content.from,
-      to: content.to,
-      parser: htmlLanguage.parser,
-      delims: {open: '${', close: '}'},
-    };
+  // If there are no interpolations, just return the parser to substitute for
+  // the entire template string.
+  if (ref.node.firstChild === null) {
+    return {parser} satisfies NestedParse;
   }
-  return null;
+
+  // If we have interpolations, return the parser and the overlay ranges that
+  // match the template strings between the interpolations.
+  const overlay: Array<{from: number; to: number}> = [];
+  let from = ref.from;
+  let child: SyntaxNode | null = ref.node.firstChild;
+
+  while (child !== null) {
+    overlay.push({from, to: child.from});
+    from = child.to;
+    child = child.nextSibling;
+  }
+  overlay.push({from, to: ref.to});
+
+  return {parser, overlay} satisfies NestedParse;
 });
 
 export const litLanguage = LRLanguage.define({
