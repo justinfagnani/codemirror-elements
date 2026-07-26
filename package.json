@@ -1,7 +1,7 @@
 {
   "name": "codemirror-elements",
-  "version": "0.0.10",
-  "description": "A set of CodeMirror custom HTML elements",
+  "version": "0.0.11",
+  "description": "HTML custom elements for CodeMirror",
   "type": "module",
   "main": "index.js",
   "scripts": {
