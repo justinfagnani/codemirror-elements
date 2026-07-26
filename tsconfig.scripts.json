@@ -1,0 +1,15 @@
+{
+  // Build for the code generator in src/scripts, which runs in Node rather than
+  // the browser and so needs the Node typings. It's kept out of the main build
+  // so that none of it is compiled into the published package.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "lib": ["ES2025"],
+    "tsBuildInfoFile": ".tsbuildinfo.scripts",
+    "declaration": false,
+    "declarationMap": false
+  },
+  "include": ["src/scripts/**/*.ts"],
+  "exclude": []
+}

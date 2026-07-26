@@ -17,14 +17,17 @@ declare global {
  */
 @customElement('cm-lang-lit')
 export class CodeMirrorLangLit extends CodeMirrorExtensionElement {
-  @property({type: Boolean})
+  @property({type: Boolean, reflect: true, useDefault: true})
   jsx = false;
 
-  @property({type: Boolean})
+  @property({type: Boolean, reflect: true, useDefault: true})
   javascript = false;
 
   override update(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('jsx') || changedProperties.has('javascript')) {
+    // `useDefault` keeps the initial property values out of `changedProperties`,
+    // so the first update has to be caught with `hasUpdated`. This matches what
+    // the generated elements do.
+    if (!this.hasUpdated || changedProperties.size > 0) {
       this.setExtensions([lit({jsx: this.jsx, typescript: !this.javascript})]);
     }
     super.update(changedProperties);

@@ -18,6 +18,7 @@ import {highlightSelectionMatches, searchKeymap} from '@codemirror/search';
 import {
   Compartment,
   EditorState,
+  Prec,
   Transaction,
   type ChangeSpec,
   type EditorSelection,
@@ -39,6 +40,7 @@ import {
 import {ContextProvider} from '@lit/context';
 import {css, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
+import {cssVarsTheme} from './css-vars-theme.js';
 import {extensionsContext} from './extension-host-context.js';
 
 /**
@@ -248,6 +250,7 @@ export class CodeMirrorEditor extends LitElement {
           ...completionKeymap,
           ...lintKeymap,
         ]),
+        Prec.lowest(cssVarsTheme()),
         this.#addedExtensionCompartment.of([]),
       ],
     }));

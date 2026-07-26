@@ -1,7 +1,14 @@
 /node_modules/
 /lib/
 /test/
+/scripts/
+# The demo's HTML is source; its scripts are built from src/demo.
+/demo/*.js
+/demo/*.js.map
+/demo/*.d.ts
+/demo/*.d.ts.map
 .wireit/
 .tsbuildinfo
+.tsbuildinfo.scripts
 /index.*
 /web-test-runner.config.*

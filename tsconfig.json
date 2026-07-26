@@ -2,13 +2,13 @@
   "compilerOptions": {
     "incremental": true,
     "tsBuildInfoFile": ".tsbuildinfo",
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM"],
+    "target": "ES2025",
+    "lib": ["ES2025", "DOM"],
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "module": "ES2022",
+    "module": "nodenext",
     "rootDir": "./src",
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -19,7 +19,7 @@
     // "isolatedModules": true,
     "verbatimModuleSyntax": true,
     // "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    // "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noUnusedLocals": true,
@@ -28,8 +28,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["mocha"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": []
+  // The code generator in src/scripts is built separately by
+  // tsconfig.scripts.json: it runs in Node, needs the Node typings, and isn't
+  // part of the published package.
+  "exclude": ["src/scripts"]
 }

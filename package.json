@@ -8,6 +8,8 @@
     "build": "wireit",
     "test": "wireit",
     "start:demo": "wireit",
+    "build:scripts": "wireit",
+    "generate": "wireit",
     "format": "npm run format:fix",
     "format:check": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --check",
     "format:fix": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --write"
@@ -31,46 +33,100 @@
     "/lib/"
   ],
   "devDependencies": {
-    "@types/chai": "^5.2.0",
+    "@types/chai": "^5.2.3",
     "@types/mocha": "^10.0.10",
-    "@web/dev-server": "^0.4.6",
-    "@web/test-runner": "^0.20.0",
-    "@web/test-runner-playwright": "^0.11.0",
-    "chai": "^5.0.0-alpha.0",
+    "@types/node": "^26.1.1",
+    "@web/test-runner": "^1.0.0",
+    "@web/test-runner-playwright": "^1.0.0",
+    "@zipadee/dev-server": "^0.0.24",
+    "chai": "^6.2.2",
     "prettier": "^3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "typescript": "~5.8.2",
+    "typescript": "~6.0.0",
     "wireit": "^0.14.11"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.4.0",
     "@codemirror/commands": "^6.2.0",
+    "@codemirror/lang-angular": "^0.1.4",
+    "@codemirror/lang-cpp": "^6.0.3",
     "@codemirror/lang-css": "^6.0.2",
+    "@codemirror/lang-go": "^6.0.1",
     "@codemirror/lang-html": "^6.4.2",
+    "@codemirror/lang-java": "^6.0.2",
     "@codemirror/lang-javascript": "^6.1.3",
+    "@codemirror/lang-jinja": "^6.0.1",
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/lang-less": "^6.0.2",
+    "@codemirror/lang-liquid": "^6.3.2",
+    "@codemirror/lang-markdown": "^6.5.1",
+    "@codemirror/lang-php": "^6.0.2",
+    "@codemirror/lang-python": "^6.2.1",
+    "@codemirror/lang-rust": "^6.0.2",
+    "@codemirror/lang-sass": "^6.0.2",
+    "@codemirror/lang-sql": "^6.10.0",
+    "@codemirror/lang-vue": "^0.1.3",
+    "@codemirror/lang-wast": "^6.0.2",
     "@codemirror/lang-xml": "^6.1.0",
+    "@codemirror/lang-yaml": "^6.1.3",
     "@codemirror/language": "^6.4.0",
     "@codemirror/lint": "^6.1.0",
     "@codemirror/search": "^6.2.3",
     "@codemirror/state": "^6.2.0",
     "@codemirror/theme-one-dark": "^6.1.0",
     "@codemirror/view": "^6.7.3",
+    "@fsegurai/codemirror-theme-github-dark": "^6.2.5",
+    "@fsegurai/codemirror-theme-github-light": "^6.2.5",
+    "@fsegurai/codemirror-theme-gruvbox-dark": "^6.2.5",
+    "@fsegurai/codemirror-theme-gruvbox-light": "^6.2.5",
+    "@fsegurai/codemirror-theme-material-dark": "^6.2.5",
+    "@fsegurai/codemirror-theme-material-light": "^6.2.5",
+    "@fsegurai/codemirror-theme-monokai": "^6.2.5",
+    "@fsegurai/codemirror-theme-nord": "^6.2.5",
+    "@fsegurai/codemirror-theme-solarized-dark": "^6.2.5",
+    "@fsegurai/codemirror-theme-vscode-dark": "^6.2.6",
+    "@fsegurai/codemirror-theme-vscode-light": "^6.2.6",
+    "@lezer/highlight": "^1.2.3",
     "@lit/context": "^1.1.4",
-    "lit": "^3.2.1"
+    "lit": "^3.2.1",
+    "thememirror": "^2.0.1"
   },
   "wireit": {
     "build": {
       "command": "tsc --pretty",
       "files": [
         "src/**/*.ts",
+        "!src/scripts/**",
         "tsconfig.json"
       ],
       "output": [
         "index.{js|js.map|d.ts|d.ts.map}",
         "/lib/",
+        "demo/*.{js,js.map,d.ts,d.ts.map}",
         ".tsbuildinfo"
       ],
       "clean": "if-file-deleted"
+    },
+    "build:scripts": {
+      "command": "tsc --pretty -p tsconfig.scripts.json",
+      "files": [
+        "src/scripts/**/*.ts",
+        "tsconfig.json",
+        "tsconfig.scripts.json"
+      ],
+      "output": [
+        "scripts/**",
+        ".tsbuildinfo.scripts"
+      ],
+      "clean": "if-file-deleted"
+    },
+    "generate": {
+      "command": "node scripts/generate-extension-elements.js",
+      "dependencies": [
+        "build:scripts"
+      ],
+      "files": [],
+      "output": []
     },
     "test": {
       "command": "wtr",
@@ -81,7 +137,7 @@
       "output": []
     },
     "start:demo": {
-      "command": "wds --node-resolve",
+      "command": "zpd --port 8123",
       "service": true,
       "dependencies": [
         "build"
