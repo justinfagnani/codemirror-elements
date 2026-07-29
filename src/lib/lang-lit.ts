@@ -96,7 +96,7 @@ export const litTypeScriptLanguage = LRLanguage.define({
 export const litTsxLanguage = LRLanguage.define({
   name: 'lit-tsx',
   parser: jsxLanguage.parser.configure({
-    dialect: 'tsx',
+    dialect: 'jsx ts',
     wrap: litParseWrapper,
   }),
   languageData: jsxLanguage.data.of({}),
